@@ -40,9 +40,9 @@ module Globalize
 
       def translation_class
         @translation_class ||= begin
-          klass = self.const_get(:Translation) rescue nil
-          if klass.nil? || klass.class_name != (self.class_name + "Translation")
-            klass = self.const_set(:Translation, Class.new(Globalize::ActiveRecord::Translation))
+          klass = self.const_get(:Tr) rescue nil
+          if klass.nil? || klass.class_name != (self.class_name + "Tr")
+            klass = self.const_set(:Tr, Class.new(Globalize::ActiveRecord::Translation))
           end
 
           klass.belongs_to name.underscore.gsub('/', '_').to_sym

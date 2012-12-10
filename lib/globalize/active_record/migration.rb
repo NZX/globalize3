@@ -143,8 +143,10 @@ module Globalize
         end
 
         def translation_index_name
+          #index_name = "index_#{translations_table_name}_on_#{table_name.singularize}_id"
+          #index_name.size < connection.index_name_length ? index_name : "index_#{Digest::SHA1.hexdigest(index_name)}"
           index_name = "index_#{translations_table_name}_on_#{table_name.singularize}_id"
-          index_name.size < connection.index_name_length ? index_name : "index_#{Digest::SHA1.hexdigest(index_name)}"
+          index_name.size < 30 ? index_name : index_name.slice!(30) 
         end
 
         def translation_locale_index_name
